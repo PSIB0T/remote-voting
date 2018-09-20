@@ -20,10 +20,11 @@ let account
 let Voting
 let candidates = { "Rama": "candidate-1", "Nick": "candidate-2", "Jose": "candidate-3" }
 const App = {
-	helloWorldFn: async function () {
+	upload: async function () {
 		try {
-			let helloWorld = await import('./test')
-			helloWorld()
+			let input = $("#fileinput").prop('files')[0]
+			let { upload } = await import('./test')
+			upload(input, input.name)
 		} catch (err) {
 			console.log(err)
 		}
