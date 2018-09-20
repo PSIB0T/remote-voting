@@ -9,8 +9,10 @@
   "rules": {
     "no-alert"             : 0,
     "key-spacing"          : 0,
-    "jsx-quotes"           : [2, "prefer-single"],
+    "quotes": "off",
     "max-len"              : [2, 120, 2],
-    "object-curly-spacing" : [2, "always"]
+    "indent": ["error", "tab"],
+    "object-curly-spacing" : [2, "always"],
+    "no-tabs" : "off"
   }
 }
