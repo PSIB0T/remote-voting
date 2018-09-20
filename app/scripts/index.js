@@ -8,7 +8,6 @@ import $ from "jquery"
 
 // Import our contract artifacts and turn them into usable abstractions.
 import votingArtifact from '../../build/contracts/Voting.json'
-import { helloWorld } from './test'
 
 // MetaCoin is our usable abstraction, which we'll use through the code below.
 // const MetaCoin = contract(metaCoinArtifact)
@@ -21,6 +20,14 @@ let account
 let Voting
 let candidates = { "Rama": "candidate-1", "Nick": "candidate-2", "Jose": "candidate-3" }
 const App = {
+	helloWorldFn: async function () {
+		try {
+			let helloWorld = await import('./test')
+			helloWorld()
+		} catch (err) {
+			console.log(err)
+		}
+	},
 	start: function () {
 		// Bootstrap the MetaCoin abstraction for Use.
 		Voting = contract(votingArtifact)
@@ -34,8 +41,6 @@ const App = {
 				})
 			})
 		}
-
-		helloWorld()
 
 		// Get the initial account balance so it can be displayed.
 		web3.eth.getAccounts(function (err, accs) {
