@@ -1,6 +1,5 @@
 const path = require('path')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const { ProvidePlugin } = require('webpack')
 
 module.exports = {
 	entry: './app/scripts/index.js',
@@ -25,10 +24,7 @@ module.exports = {
 				loader: 'babel-loader',
 				query: {
 					presets: ['env'],
-					plugins: ['transform-react-jsx', 'transform-object-rest-spread', 'transform-runtime',
-						new ProvidePlugin({
-							Popper: ['popper.js', 'default']
-						})]
+					plugins: ['transform-object-rest-spread', 'transform-runtime']
 				}
 			}
 		]
