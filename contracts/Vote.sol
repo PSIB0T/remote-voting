@@ -1,14 +1,16 @@
 pragma solidity ^0.4.19;
 
 import "./erc721.sol";
+import "./Registration.sol";
 
-contract Vote is ERC721 {
+contract Vote is ERC721, Registration {
     uint private tokenCount = 0;
     mapping (uint => address) private voteOwner;
     mapping (address => uint) private voteCount;
     mapping (uint => address) private voteApprovals;
 
     function add() public returns (uint){
+        require(validCandidate(msg.sender),"Candidate not registered");
         voteOwner[tokenCount] = msg.sender;
         voteCount[msg.sender] = 1;
         tokenCount++;
@@ -16,28 +18,34 @@ contract Vote is ERC721 {
     }
 
     function balanceOf(address _owner) public view returns (uint256 _balance) {
+        require(validCandidate(msg.sender),"Candidate not registered");
         return voteCount[_owner];
     }
 
     function ownerOf(uint256 _tokenId) public view returns (address _owner) {
+        require(validCandidate(msg.sender),"Candidate not registered");
         return voteOwner[_tokenId];
     }
 
     function _transfer(address _from, address _to, uint256 _tokenId) private {
+        require(validCandidate(msg.sender),"Candidate not registered");
         voteCount[_to]++;
         voteCount[_from]--;
         voteOwner[_tokenId] = _to;
     }
 
     function transfer(address _to, uint256 _tokenId) public {
+        require(validCandidate(msg.sender),"Candidate not registered");
         _transfer(msg.sender, _to, _tokenId);
     }
 
     function approve(address _to, uint256 _tokenId) public {
+        require(validCandidate(msg.sender),"Candidate not registered");
         voteApprovals[_tokenId] = _to;
     }
 
     function takeOwnership(uint256 _tokenId) public {
+        require(validCandidate(msg.sender),"Candidate not registered");
         require(voteApprovals[_tokenId] == msg.sender, "Vote not approved");
         address owner = ownerOf(_tokenId);
         _transfer(owner, msg.sender, _tokenId);

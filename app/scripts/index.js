@@ -63,6 +63,27 @@ const App = {
 			console.log(account)
 		})
 	},
+	checkCandidate: function () {
+		Vote.deployed().then((contractInstance) => {
+			contractInstance.validCandidate.call(web3.eth.accounts[0])
+				.then((v) => {
+					console.log(v)
+				}).catch((err) => {
+					console.log(err)
+				})
+		})
+	},
+	registerCandidate: function () {
+		Vote.deployed().then((contractInstance) => {
+			contractInstance.regCandidate({ gas: 140000, from: web3.eth.accounts[0] })
+				.then((v) => {
+					console.log("Candidate registered successfully")
+				}).catch((err) => {
+					console.log(err)
+				})
+		})
+	},
+
 	addVote: function () {
 		Vote.deployed().then(function (contractInstance) {
 			contractInstance.add({ gas: 140000, from: web3.eth.accounts[0] }).then(function (v) {
