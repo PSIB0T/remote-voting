@@ -63,9 +63,9 @@ const App = {
 			console.log(account)
 		})
 	},
-	checkCandidate: function () {
+	checkVoter: function () {
 		Vote.deployed().then((contractInstance) => {
-			contractInstance.validCandidate.call(web3.eth.accounts[0])
+			contractInstance.validVoter.call(web3.eth.accounts[0])
 				.then((v) => {
 					console.log(v)
 				}).catch((err) => {
@@ -73,13 +73,38 @@ const App = {
 				})
 		})
 	},
+	registerVoter: function () {
+		return new Promise((resolve, reject) => {
+			Vote.deployed().then((contractInstance) => {
+				contractInstance.regVoter("Anon", { gas: 140000, from: web3.eth.accounts[0] })
+					.then((v) => {
+						console.log("Successfully registered voter")
+						contractInstance.add({ gas: 140000, from: web3.eth.accounts[0] })
+					}).then((v) => {
+						console.log("Successfully added vote")
+						return resolve(contractInstance)
+					}).catch((err) => {
+						return reject(err)
+					})
+			})
+		})
+	},
 	registerCandidate: function () {
+		this.registerVoter()
+			.then((contractInstance) => {
+				return contractInstance.regCandidate({ gas: 140000, from: web3.eth.accounts[0] })
+			}).then((v) => {
+				console.log("Successfully registered candidate")
+			}).catch((err) => {
+				console.log(err)
+			})
+	},
+
+	getVoter: function () {
 		Vote.deployed().then((contractInstance) => {
-			contractInstance.regCandidate({ gas: 140000, from: web3.eth.accounts[0] })
+			contractInstance.getVoter(web3.eth.accounts[0])
 				.then((v) => {
-					console.log("Candidate registered successfully")
-				}).catch((err) => {
-					console.log(err)
+					console.log(v)
 				})
 		})
 	},
@@ -116,28 +141,23 @@ const App = {
 
 	transferVote: function () {
 		let address = $("#candidate").val()
-		let token = 3
 		Vote.deployed().then(function (contractInstance) {
-			contractInstance.approve(address, token, { gas: 140000, from: web3.eth.accounts[0] }).then(function () {
-				return contractInstance.ownerOf.call(token)
-			}).then((v) => {
-				console.log(v.toString())
+			contractInstance.transfer(address, { gas: 140000, from: web3.eth.accounts[0] }).then(function () {
+				console.log("Transferred vote")
 			}).catch((err) => {
 				console.log(err)
 			})
 		})
 	},
 
-	takeOwnership: function () {
-		let token = $("#candidate").val()
-		Vote.deployed().then(function (contractInstance) {
-			contractInstance.takeOwnership(token, { gas: 140000, from: web3.eth.accounts[0] }).then(function () {
-				return contractInstance.ownerOf.call(token)
-			}).then((v) => {
-				console.log(v.toString())
-			}).catch((err) => {
-				console.log(err)
-			})
+	getVoterInfo: function () {
+		Vote.deployed().then((contractInstance) => {
+			contractInstance.getVoter.call(web3.eth.accounts[0])
+				.then((v) => {
+					console.log(v)
+				}).catch((err) => {
+					console.log(err)
+				})
 		})
 	},
 
