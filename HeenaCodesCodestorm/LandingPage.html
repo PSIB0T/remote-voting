@@ -1,0 +1,187 @@
+<!-- add about us -->
+<!-- To add background image, save the image as "bg-banner.png" and save it in the static folder. It comes automatically !!-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
+  <title>VoteChain</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet"> 
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway|Candal">
+  <link rel="stylesheet" type="text/css" href="static/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="static/css/style.css">
+  <link rel="stylesheet" type="text/css" href="static/css/animate.css">
+<!--   <style type="text/css">
+    .btn
+    {
+      background-color: #337ab7;
+    }
+  </style> -->
+</head>
+
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+	<nav class="navbar navbar-default navbar-fixed-top">
+	    <div class="container">
+	      <div class="col-md-12">
+	        <div class="navbar-header">
+	          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	          <a class="navbar-brand" href="#"><span style="color:white;font-family:'Josefin Sans';">VoteChain</span></a>
+	        </div>
+	        <div class="collapse navbar-collapse navbar-right" id="myNavbar">
+	          <ul class="nav navbar-nav">
+	            <li><a href="#banner"><span class="glyphicon glyphicon-home"></span>&nbsp Home</a></li>
+	            <li ><a href="#about"><span class="glyphicon glyphicon-user"></span>&nbsp About</a></li>
+	            <!--<li><a href="#login">Login</a></li>-->
+	            <li ><a href="#signup"><span class="glyphicon glyphicon-log-in"></span>&nbsp Sign up</a></li>
+	          </ul>
+	        </div>
+	        <div class="collapse navbar-collapse navbar-right" id="myNavbar">
+	        </div>
+	      </div>
+	    </div>
+	</nav>  
+  <section id="banner" class="banner">
+    <div class="bg-color">
+      <div class="container">
+        <div class="row">
+          <div class="banner-info">
+            <div class="banner-logo text-center">
+              <img src="static/img/banner.png" width="150" class="img-responsive"  style="border-radius: 50%;">
+            </div>
+            <div class="banner-text text-center">
+              <h1 class="white animated zoomIn">Electing the right way!</h1>
+              <a href="#signup" class="btn btn-form">Sign Up</a>
+            </div>
+            <div class="overlay-detail text-center">
+              <a href="#about"><i class="fa fa-angle-down"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--/ banner-->
+
+  <!--about-->
+  <section id="about" class="section-padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="section-title">
+            <h2 class="head-title lg-line">About</h2>
+            <hr class="botm-line">
+            <br>
+            <p class="h3 text-justify">Hridhyanam is an attempt to empower the medical industry with the prowess of Computer Vision. India is a country of 1.32 billion people and less than a 10,000 radiologists and the huge doctor-patient ratio discrepancy between the rural and urban areas doesn't help the  issue.</p>
+            <p class="h3 text-justify">At Hridhyanam, we hope to reduce this issue by empowering the technician to screen for diseases by logining the medical images. As a proof of concept  we have diagnosed a Cardiomegaly by processing the Chest Xrays.</p>
+            <p class="h3 text-justify"> We aim to form an alliance between the analytical expertise of the man and the computing capabilities of the machine for these two, if coalesced, can truly provide healthcare and, in turn, heartcare at its best.</p>
+            <br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--/ about-->
+
+  <!--login-->
+  <section id="signup" class="section-padding" style="background-color: lightgray">
+  	<div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+    <center><h1>SIGN UP</h1></center>
+    <form id="validateform" name="signup" method="post" action="SignUpControl.php">
+    <div class="form-group">
+    <input type="text" class="form-control" name="firstname" placeholder="Enter your First Name">
+    </div>
+    <div class="form-group">
+    <input type="text" class="form-control" name="lastname" placeholder="Enter your Last Name">
+    </div>
+    <div class="form-group">
+    <input type="text" class="form-control" name="email" class="textsize" id= "email" placeholder="Enter your VES Email ID ONLY">
+    </div>
+    <div class="form-group">
+    <input type="text"  class="form-control" name="remail" id ="remail"  class="textsize" placeholder="Enter your Alternative Email ID ">
+    </div>
+    <div class="form-group">
+    <input type="password"  class="form-control" id="password" class="textsize" name="password" placeholder="Enter your Password">
+    </div>
+    <div class="form-group">
+    <input type="password"  class="form-control" id="password" class="textsize" name="confirmpassword" placeholder="Confirm your Password">
+    </div>
+    <div class="form-group">
+    <select name="gender" class="form-control">
+        <option value="" selected>Select your Gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+    </select>
+    </div>
+    <div class="form-group">
+    <select name="course" class="form-control">
+        <option value="" selected>Select Course</option>
+        <option value="Comp">Computer Engineering</option>
+        <option value="Inft">Information Technology</option>
+        <option value="Extr">Electonics</option>
+        <option value="Extc">Electronics and Telecommunication</option>
+        <option value="Instru">Instrumentation</option>
+    <option value="HS">Humanities and Science</option>
+        </select>
+    </div>
+    <div class="form-group">
+    <select name="division" class="form-control">
+        <option value="" selected>Select Division</option>
+        <option value="fe">F.E</option>
+        <option value="se">S.E</option>
+        <option value="te">T.E</option>
+        <option value="be">B.E</option>
+        </select>
+    </div>
+    <div class="form-group">
+    <input name="dob" id="dob" class="form-control" placeholder="Enter your DOB" onfocus="(this.type='date')" onfocusout="(this.type='text')" >
+    </div>
+    <div class="form-group">
+    <input type="text" minlength="10" pattern="[0-9]{10}" class="form-control" name="mobileno" class="textsize" id="mobileno" placeholder="Enter your Mobile Number eg.,+91" >
+    </div>
+    <div class="form-group"  style="color:#337ab7;">
+    <button type="submit" class="btn btn-info btn-block" name="submitButton">Sign Up</button>
+    </div>
+    </form>
+    <div class="col-sm-4"></div>
+    </div>
+  </div>
+  </section>
+  <!--/ login-->
+  <!--signup-->
+  
+	<footer id="footer">
+	    <div class="footer-line">
+	      <div class="container">
+	        <div class="row">
+	          <div class="col-md-12 text-center">
+	            © Copyright VoteChain. All Rights Reserved.
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	</footer>
+
+	<script src="static/js/jquery.min.js"></script>
+	<script src="static/js/jquery.easing.min.js"></script>
+	<script src="static/js/bootstrap.min.js"></script>
+	<script src="static/js/custom.js"></script> 
+
+	</body>
+
+</html>
