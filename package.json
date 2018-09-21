@@ -6,7 +6,7 @@
     "test": "truffle.cmd test",
     "lint": "eslint ./",
     "prepare": "truffle.cmd compile && npm test && npm run lint && webpack-cli --config ./webpack.config.js",
-    "make": "truffle.cmd compile && truffle.cmd migrate",
+    "make": "truffle.cmd compile && truffle.cmd migrate --reset",
     "build": "npm install",
     "ganache": "ganache-cli -b 5",
     "dev": "webpack-dev-server"

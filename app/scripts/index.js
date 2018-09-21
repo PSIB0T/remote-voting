@@ -8,6 +8,7 @@ import $ from "jquery"
 
 // Import our contract artifacts and turn them into usable abstractions.
 import votingArtifact from '../../build/contracts/Voting.json'
+import voteArtifact from '../../build/contracts/Vote.json'
 
 // MetaCoin is our usable abstraction, which we'll use through the code below.
 // const MetaCoin = contract(metaCoinArtifact)
@@ -17,7 +18,7 @@ import votingArtifact from '../../build/contracts/Voting.json'
 // For application bootstrapping, check out window.addEventListener below.
 let accounts
 let account
-let Voting
+let Voting, Vote
 let candidates = { "Rama": "candidate-1", "Nick": "candidate-2", "Jose": "candidate-3" }
 const App = {
 	upload: async function () {
@@ -32,7 +33,9 @@ const App = {
 	start: function () {
 		// Bootstrap the MetaCoin abstraction for Use.
 		Voting = contract(votingArtifact)
+		Vote = contract(voteArtifact)
 		Voting.setProvider(web3.currentProvider)
+		Vote.setProvider(web3.currentProvider)
 		let candidateNames = Object.keys(candidates)
 		for (var i = 0; i < candidateNames.length; i++) {
 			let name = candidateNames[i]
@@ -42,7 +45,6 @@ const App = {
 				})
 			})
 		}
-
 		// Get the initial account balance so it can be displayed.
 		web3.eth.getAccounts(function (err, accs) {
 			if (err != null) {
@@ -61,6 +63,63 @@ const App = {
 			console.log(account)
 		})
 	},
+	addVote: function () {
+		Vote.deployed().then(function (contractInstance) {
+			contractInstance.add({ gas: 140000, from: web3.eth.accounts[0] }).then(function (v) {
+				console.log(v)
+				return contractInstance.ownerOf.call(0)
+			}).then((v) => {
+				console.log(v.toString())
+			}).catch((err) => {
+				console.log(err)
+			})
+		})
+	},
+
+	checkVote: function () {
+		Vote.deployed().then(function (contractInstance) {
+			contractInstance.balanceOf.call(web3.eth.accounts[0]).then((v) => {
+				console.log(v.toString())
+			})
+		})
+	},
+
+	checkVoteOwner: function () {
+		let token = $("#candidate").val()
+		Vote.deployed().then(function (contractInstance) {
+			contractInstance.ownerOf.call(token).then((v) => {
+				console.log(v.toString())
+			})
+		})
+	},
+
+	transferVote: function () {
+		let address = $("#candidate").val()
+		let token = 3
+		Vote.deployed().then(function (contractInstance) {
+			contractInstance.approve(address, token, { gas: 140000, from: web3.eth.accounts[0] }).then(function () {
+				return contractInstance.ownerOf.call(token)
+			}).then((v) => {
+				console.log(v.toString())
+			}).catch((err) => {
+				console.log(err)
+			})
+		})
+	},
+
+	takeOwnership: function () {
+		let token = $("#candidate").val()
+		Vote.deployed().then(function (contractInstance) {
+			contractInstance.takeOwnership(token, { gas: 140000, from: web3.eth.accounts[0] }).then(function () {
+				return contractInstance.ownerOf.call(token)
+			}).then((v) => {
+				console.log(v.toString())
+			}).catch((err) => {
+				console.log(err)
+			})
+		})
+	},
+
 	voteForCandidate : function () {
 		$("#msg").html(`Vote has been submitted. The vote count will increment as soon as 
 						the vote is recorded on the blockchain. Please wait.`)
