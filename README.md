@@ -1,4 +1,4 @@
-# TSEC hackathon
+# Remote Voting
 
 ## Steps
 
